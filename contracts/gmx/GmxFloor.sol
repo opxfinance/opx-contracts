@@ -71,7 +71,7 @@ contract GmxFloor is ReentrancyGuard, TokenManager {
     }
 
     // mint refers to increasing the circulating supply
-    // the GMX tokens to be transferred out must be pre-transferred into this contract
+    // the OPX tokens to be transferred out must be pre-transferred into this contract
     function mint(uint256 _amount, uint256 _maxCost, address _receiver) public onlyHandler nonReentrant returns (uint256) {
         require(_amount > 0, "GmxFloor: invalid _amount");
 

@@ -147,7 +147,7 @@ contract MigrationHandler is ReentrancyGuard {
     ) external onlyAdmin nonReentrant {
         address iouToken = IGmxMigrator(_migrator).iouTokens(_token);
         uint256 iouBalance = IERC20(iouToken).balanceOf(_account);
-        uint256 iouTokenAmount = _usdgAmount.div(2); // each GMX is priced at $2
+        uint256 iouTokenAmount = _usdgAmount.div(2); // each OPX is priced at $2
 
         uint256 refunded = refundedAmounts[_account][iouToken];
         refundedAmounts[_account][iouToken] = refunded.add(iouTokenAmount);

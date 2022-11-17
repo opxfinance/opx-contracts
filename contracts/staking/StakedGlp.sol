@@ -10,14 +10,14 @@ import "../core/interfaces/IGlpManager.sol";
 import "./interfaces/IRewardTracker.sol";
 import "./interfaces/IRewardTracker.sol";
 
-// provide a way to transfer staked GLP tokens by unstaking from the sender
+// provide a way to transfer staked OLP tokens by unstaking from the sender
 // and staking for the receiver
 // tests in RewardRouterV2.js
 contract StakedGlp {
     using SafeMath for uint256;
 
     string public constant name = "StakedGlp";
-    string public constant symbol = "sGLP";
+    string public constant symbol = "sOLP";
     uint8 public constant decimals = 18;
 
     address public glp;
@@ -63,7 +63,7 @@ contract StakedGlp {
     }
 
     function balanceOf(address _account) external view returns (uint256) {
-        return IRewardTracker(feeGlpTracker).depositBalances(_account, glp);
+        return IRewardTracker(stakedGlpTracker).depositBalances(_account, glp);
     }
 
     function totalSupply() external view returns (uint256) {

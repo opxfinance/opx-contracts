@@ -72,11 +72,7 @@ contract GlpManager is ReentrancyGuard, Governable, IGlpManager {
         inPrivateMode = _inPrivateMode;
     }
 
-    function setShortsTracker(IShortsTracker _shortsTracker) external onlyGov {
-        shortsTracker = _shortsTracker;
-    }
-
-    function setShortsTrackerAveragePriceWeight(uint256 _shortsTrackerAveragePriceWeight) external override onlyGov {
+    function setShortsTrackerAveragePriceWeight(uint256 _shortsTrackerAveragePriceWeight) external onlyGov {
         require(shortsTrackerAveragePriceWeight <= BASIS_POINTS_DIVISOR, "GlpManager: invalid weight");
         shortsTrackerAveragePriceWeight = _shortsTrackerAveragePriceWeight;
     }
@@ -85,7 +81,7 @@ contract GlpManager is ReentrancyGuard, Governable, IGlpManager {
         isHandler[_handler] = _isActive;
     }
 
-    function setCooldownDuration(uint256 _cooldownDuration) external override onlyGov {
+    function setCooldownDuration(uint256 _cooldownDuration) external onlyGov {
         require(_cooldownDuration <= MAX_COOLDOWN_DURATION, "GlpManager: invalid _cooldownDuration");
         cooldownDuration = _cooldownDuration;
     }
@@ -218,7 +214,7 @@ contract GlpManager is ReentrancyGuard, Governable, IGlpManager {
         require(usdgAmount >= _minUsdg, "GlpManager: insufficient USDG output");
 
         uint256 mintAmount = aumInUsdg == 0 ? usdgAmount : usdgAmount.mul(glpSupply).div(aumInUsdg);
-        require(mintAmount >= _minGlp, "GlpManager: insufficient GLP output");
+        require(mintAmount >= _minGlp, "GlpManager: insufficient OLP output");
 
         IMintable(glp).mint(_account, mintAmount);
 
